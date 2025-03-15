@@ -5,10 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GYD</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
         body {
             font-family: 'Poppins', sans-serif;
+        }
+        .slide {
+            display: none;
+        }
+        .slide.active {
+            display: block;
         }
     </style>
 </head>
@@ -16,24 +24,69 @@
 
     <div class="w-full max-w-md bg-gray-800 bg-opacity-75 backdrop-blur-lg rounded-3xl shadow-xl p-6 md:p-8 text-center">
 
-        <img class="w-28 h-28 md:w-36 md:h-36 rounded-full mx-auto border-4 border-indigo-500 shadow-lg transform hover:scale-110 transition duration-300" 
-             src="https://via.placeholder.com/150" alt="GYD">
+        <img class="w-28 h-28 md:w-32 md:h-32 rounded-full mx-auto border-4 border-indigo-400 shadow-lg" 
+             src="https://via.placeholder.com/150" alt="Sergio Gonzalez">
 
         <h1 class="text-2xl md:text-3xl text-white font-semibold mt-4">GYD</h1>
-        <p class="text-indigo-300 text-sm md:text-base mt-2">Aventures • Freeman  • Growth </p>
+        <p class="text-indigo-300 text-sm md:text-base mt-2">Passionate Creator • Tech Enthusiast • Entrepreneur</p>
 
-        <div class="mt-6 space-y-3">
-            <a href="#" class="block py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full shadow transition-transform duration-300 hover:scale-105">💼 Young Desert</a>
-            <a href="#" class="block py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow transition-transform duration-300 hover:scale-105"> :yt: Youtube</a>
-            <a href="#" class="block py-2 bg-pink-500 hover:bg-pink-600 text-white rounded-full shadow transition-transform duration-300 hover:scale-105">💬 WhatsApp</a>
-            <a href="#" class="block py-2 bg-green-500 hover:bg-green-600 text-white rounded-full shadow transition-transform duration-300 hover:scale-105">🔗 LinkedIn</a>
+        <div class="mt-6 relative">
+            <div class="slide active p-4 bg-red-600 text-white rounded-xl shadow">
+                <i class="fab fa-youtube fa-2x"></i>
+                <h2 class="mt-2 font-semibold">YouTube Channel</h2>
+                <p class="text-sm">Subscribe for tech, tutorials, and more!</p>
+            </div>
+
+            <div class="slide p-4 bg-yellow-500 text-white rounded-xl shadow">
+                <i class="fas fa-book fa-2x"></i>
+                <h2 class="mt-2 font-semibold">Buy My Book</h2>
+                <p class="text-sm">Insights on growth, tech, and entrepreneurship.</p>
+            </div>
+
+            <div class="slide p-4 bg-teal-500 text-white rounded-xl shadow">
+                <i class="fa-solid fa-calendar-check fa-2x"></i>
+                <h2 class="mt-2 font-semibold">Make an Appointment</h2>
+                <p class="text-sm">Discuss your projects and ideas personally.</p>
+            </div>
+
+            <div class="mt-4 flex justify-center gap-2">
+                <button class="dot w-3 h-3 rounded-full bg-gray-400" onclick="showSlide(0)"></button>
+                <button class="w-3 h-3 rounded-full bg-gray-600" onclick="showSlide(1)"></button>
+                <button class="w-3 h-3 rounded-full bg-gray-600" onclick="showSlide(2)"></button>
+            </div>
         </div>
 
-        <footer class="mt-6 text-xs text-indigo-200 opacity-70">
-            © 2025 Sergio Gonzalez
+        <footer class="mt-6 text-xs text-indigo-200 opacity-60">
+            © 2025 GYD
         </footer>
 
     </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('button');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, idx) => {
+                slide.classList.toggle('active', idx === index);
+                dots[idx].classList.toggle('bg-indigo-400', idx === index);
+                dots[idx].classList.toggle('bg-gray-600', idx !== index);
+            });
+            currentSlide = index;
+        }
+
+        dots.forEach((dot, idx) => {
+            dot.addEventListener('click', () => showSlide(idx));
+        });
+
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }, 2000);
+
+        showSlide(0);
+    </script>
 
 </body>
 </html>
